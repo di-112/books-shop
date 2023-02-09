@@ -1,7 +1,7 @@
-import React from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {Badge} from "@mui/material";
-import {useCartBooksStore} from "../../../store/cartBooks";
+import React from 'react'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import { Badge } from '@mui/material'
+import { useCartBooksStore } from '../../../store/cartBooks'
 
 const Cart = () => {
   const chosenBooks = useCartBooksStore(state => state.booksIds)
@@ -13,7 +13,7 @@ const Cart = () => {
     >
       <ShoppingCartIcon />
     </Badge>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

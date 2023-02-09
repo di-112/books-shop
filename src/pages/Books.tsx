@@ -1,13 +1,16 @@
-import React from 'react';
-import {Grid} from "@mui/material";
-import BookCard from "../modules/BookCard";
-import {useBooksQuery} from "../hooks/useBooksQuery";
+import React from 'react'
+import { Grid } from '@mui/material'
+import BookCard from '../modules/BookCard'
+import { useBooksQuery } from '../hooks/useBooksQuery'
 
 const Books = () => {
-  const {data: books = []} = useBooksQuery()
+  const { data: books = [] } = useBooksQuery()
 
   return (
-    <Grid container rowGap={4}>
+    <Grid
+      container
+      rowGap={4}
+    >
       {books.map(book => (
         <Grid xs={3}>
           <BookCard
@@ -17,7 +20,7 @@ const Books = () => {
         </Grid>
       ))}
     </Grid>
-  );
-};
+  )
+}
 
-export default Books;
+export default Books

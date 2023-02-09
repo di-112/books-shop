@@ -1,9 +1,9 @@
-import React from 'react';
-import InputBase from "@mui/material/InputBase";
-import {alpha, styled} from "@mui/material/styles";
-import SearchIcon from '@mui/icons-material/Search';
+import React from 'react'
+import InputBase from '@mui/material/InputBase'
+import { alpha, styled } from '@mui/material/styles'
+import SearchIcon from '@mui/icons-material/Search'
 
-const SearchWrapper = styled('div')(({theme}) => ({
+const SearchWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -19,7 +19,7 @@ const SearchWrapper = styled('div')(({theme}) => ({
   },
 }))
 
-const SearchIconWrapper = styled('div')(({theme})=>({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -43,20 +43,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+}))
 
-const Search = () => {
-  return (
-    <SearchWrapper>
-      <SearchIconWrapper>
-        <SearchIcon/>
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </SearchWrapper>
-  );
-};
+const Search = () => (
+  <SearchWrapper>
+    <SearchIconWrapper>
+      <SearchIcon />
+    </SearchIconWrapper>
+    <StyledInputBase
+      placeholder="Search…"
+      inputProps={{ 'aria-label': 'search' }}
+    />
+  </SearchWrapper>
+)
 
-export default Search;
+export default Search

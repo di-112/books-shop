@@ -1,9 +1,8 @@
-import React from 'react';
-import {Grid} from "@mui/material";
-import BookCard from "../modules/BookCard";
-import {useQueryClient} from "@tanstack/react-query";
-import {IBook} from "../models/book.models";
-import {useCartBooksStore} from "../store/cartBooks";
+import React from 'react'
+import { Stack } from '@mui/material'
+import { useQueryClient } from '@tanstack/react-query'
+import { IBook } from '../models/book.models'
+import { useCartBooksStore } from '../store/cartBooks'
 
 const Cart = () => {
   const client = useQueryClient()
@@ -12,7 +11,11 @@ const Cart = () => {
 
   const chosenBooks = client.getQueryData<IBook[]>(['books'])?.filter(book => booksIds.includes(book.id))
 
-  return chosenBooks?.map(book => <div key={book.id}>{book.title}</div>);
-};
+  return (
+    <Stack spacing={2}>
+      {chosenBooks?.map(book => <div key={book.id}>{book.title}</div>)}
+    </Stack>
+  )
+}
 
-export default Cart;
+export default Cart
