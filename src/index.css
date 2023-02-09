@@ -1,0 +1,26 @@
+:root {
+  font-family: Roboto, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --header-height: 52px
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  padding: calc(var(--header-height) + 24px) 0;
+  background: url('https://www.mola.com/wp-content/uploads/2016/02/pattern-web-1-1024x576.jpg');
+}
+
+#root {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+}
