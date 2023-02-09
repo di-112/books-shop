@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import { IBook } from '../../models/book.models'
 import BookInfo from './components/BookInfo'
 import StyledCard from './components/StyledCard'
-import { useCartBooksStore } from '../../store/cartBooks'
+import { useCartBooksStore } from '../../store/cart'
 
 interface IBookCard {
   book: IBook

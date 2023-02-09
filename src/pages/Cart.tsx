@@ -1,15 +1,14 @@
 import React from 'react'
 import { Stack } from '@mui/material'
-import { useQueryClient } from '@tanstack/react-query'
-import { IBook } from '../models/book.models'
-import { useCartBooksStore } from '../store/cartBooks'
+import { useCartBooksStore } from '../store/cart'
+import { useBooks } from '../hooks/useBooksQuery'
 
 const Cart = () => {
-  const client = useQueryClient()
+  const allBooks = useBooks()
 
   const booksIds = useCartBooksStore(state => state.booksIds)
 
-  const chosenBooks = client.getQueryData<IBook[]>(['books'])?.filter(book => booksIds.includes(book.id))
+  const chosenBooks = allBooks.filter(book => booksIds.includes(book.id))
 
   return (
     <Stack spacing={2}>
