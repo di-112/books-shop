@@ -15,12 +15,9 @@ html, body, #root {
 }
 
 body {
-  padding: calc(var(--header-height) + 24px) 0;
   background: url('https://www.mola.com/wp-content/uploads/2016/02/pattern-web-1-1024x576.jpg');
 }
 
 #root {
-  max-width: 1080px;
-  margin: 0 auto;
-  text-align: center;
+  padding: var(--header-height) 0;
 }

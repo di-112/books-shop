@@ -3,7 +3,7 @@ import { Grid } from '@mui/material'
 import BookCard from '../modules/BookCard'
 import { useBooks, useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
-import Sidebar from '../modules/Sidebar'
+import PageWrapper from '../modules/PageWrapper'
 
 const Books = () => {
   useBooksQuery()
@@ -13,14 +13,18 @@ const Books = () => {
   const { searchBooks, searchValue } = useSearchBooksStore(state => state)
 
   return (
-    <>
-      <Sidebar />
+    <PageWrapper title="Каталог">
       <Grid
         container
         rowGap={4}
+        component="section"
       >
         {(searchValue ? searchBooks : allBooks).map(book => (
-          <Grid xs={3}>
+          <Grid
+            md={3}
+            xs={6}
+            component="article"
+          >
             <BookCard
               key={book.title}
               book={book}
@@ -28,7 +32,7 @@ const Books = () => {
           </Grid>
         ))}
       </Grid>
-    </>
+    </PageWrapper>
   )
 }
 

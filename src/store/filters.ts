@@ -13,14 +13,17 @@ export interface IFilters {
 interface IFiltersState {
   filters: IFilters,
   toggleCategory: (category: string) => void,
-  setPrice: (min?: number, max?: number) => void,
+  setPrice: (obj : { min?: number, max?: number }) => void,
 }
 
 export const useFilters = create(
   persist(immer<IFiltersState>(set => ({
     filters: {
       categories: [],
-      price: {},
+      price: {
+        min: 0,
+        max: 2000,
+      },
     },
     toggleCategory: category => {
       set(state => {
@@ -34,7 +37,7 @@ export const useFilters = create(
         state.filters.categories = state.filters.categories.filter(item => item !== category)
       })
     },
-    setPrice: (min, max) => {
+    setPrice: ({ min, max }) => {
       set(state => {
         // eslint-disable-next-line no-param-reassign
         state.filters.price = {

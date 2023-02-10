@@ -1,105 +1,86 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { alpha, styled } from '@mui/material/styles'
-import { Box, Drawer, Slider } from '@mui/material'
+import { Box } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import CategoryAccordion from './components/CategoryAccordion'
+import PriceAccordion from './components/PriceAccordion'
+import RatingAccordion from './components/RatingAccordion'
+import { useFilters } from '../../store/filters'
 
-import Accordion from '@mui/material/Accordion'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { categories } from '../../resources/categories'
-import Category from './components/Category'
-
-const StyledDrawer = styled(Drawer)(({ theme }) => ({
-  width: 150,
+const Aside = styled(Box)(({ theme }) => ({
+  width: 300,
   flexShrink: 0,
-  '& .MuiDrawer-paper': {
-    width: 300,
-    left: 32,
-    bottom: 120,
-    padding: theme.spacing(2),
-    top: 'calc(2 * var(--header-height) - 32px)',
-    border: 'none',
-    height: 'calc(100vh - 2 * var(--header-height))',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(1),
-    boxSizing: 'border-box',
-    backgroundColor: alpha(theme.palette.common.white, 0.5),
+  position: 'sticky',
+  top: 68,
+  border: 'none',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: theme.spacing(2),
+  paddingBottom: 64,
+  height: 'calc(100vh - 2 * var(--header-height))',
+  backgroundColor: alpha(theme.palette.common.white, 0.5),
+}))
+
+const FiltersWrapper = styled(Box)(() => ({
+  overflow: 'auto',
+  '::-webkit-scrollbar': {
+    width: 0,
   },
 }))
 
-const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
-  color: theme.palette.common.black,
-  borderRadius: 0,
-  boxShadow: 'none',
-}))
+const Sidebar = () => {
+  const { price, categories } = useFilters(state => state.filters)
 
-const StyledAccordion = styled(Accordion)(() => ({
-  borderRadius: 0,
-  boxShadow: 'none',
-  '&:before': {
-    display: 'none',
-  },
-}))
+  const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
+  const [chosenCategories, setChosenCategories] = useState(categories)
+  const [rating, setRating] = useState(0)
 
-const Sidebar = () => (
-  <StyledDrawer
-    variant="persistent"
-    hideBackdrop
-    anchor="left"
-    open
-  >
-    <Typography
-      fontWeight={700}
-      variant="body1"
-      textAlign="left"
-    >
-      Фильтр
-    </Typography>
-    <Box>
-      <StyledAccordion defaultExpanded>
-        <StyledAccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+  const toggleCategory = (category: string) => {
+    if (chosenCategories.includes(category)) {
+      setChosenCategories(chosenCategories.filter(item => item !== category))
+
+      return
+    }
+    setChosenCategories([...chosenCategories, category])
+  }
+
+  return (
+    <Aside component="aside">
+      <Typography
+        fontWeight={700}
+        variant="body1"
+        textAlign="left"
+        mb={2}
+      >
+        Фильтр
+      </Typography>
+      <FiltersWrapper>
+        <CategoryAccordion
+          chosenCategories={chosenCategories}
+          toggleCategory={toggleCategory}
+        />
+        <PriceAccordion
+          prices={prices}
+          setPrices={setPrices}
+        />
+        <RatingAccordion
+          rating={rating}
+          setRating={setRating}
+        />
+        <Button
+          sx={{
+            right: 16,
+            bottom: 16,
+            position: 'absolute',
+          }}
+          variant="contained"
         >
-          <Typography>Категория</Typography>
-        </StyledAccordionSummary>
-        <AccordionDetails>
-          <Box
-            gap={1}
-            display="flex"
-            flexDirection="column"
-          >
-            {categories.map(category => <Category category={category} />)}
-          </Box>
-        </AccordionDetails>
-      </StyledAccordion>
-      <StyledAccordion defaultExpanded>
-        <StyledAccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Цена</Typography>
-        </StyledAccordionSummary>
-        <AccordionDetails>
-          <Box
-            gap={1}
-            display="flex"
-            flexDirection="column"
-          >
-            <Slider
-              min={0}
-              max={100}
-              aria-label="Фильтр цены"
-            />
-          </Box>
-        </AccordionDetails>
-      </StyledAccordion>
-    </Box>
-  </StyledDrawer>
-)
+          Подтвердить
+        </Button>
+      </FiltersWrapper>
+    </Aside>
+  )
+}
 
 export default Sidebar
