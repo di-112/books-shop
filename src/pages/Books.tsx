@@ -1,28 +1,34 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 import BookCard from '../modules/BookCard'
-import { useBooksQuery } from '../hooks/useBooksQuery'
+import { useBooks, useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
+import Sidebar from '../modules/Sidebar'
 
 const Books = () => {
-  const { data: allBooks = [] } = useBooksQuery()
+  useBooksQuery()
+
+  const allBooks = useBooks()
 
   const { searchBooks, searchValue } = useSearchBooksStore(state => state)
 
   return (
-    <Grid
-      container
-      rowGap={4}
-    >
-      {(searchValue ? searchBooks : allBooks).map(book => (
-        <Grid xs={3}>
-          <BookCard
-            key={book.title}
-            book={book}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Sidebar />
+      <Grid
+        container
+        rowGap={4}
+      >
+        {(searchValue ? searchBooks : allBooks).map(book => (
+          <Grid xs={3}>
+            <BookCard
+              key={book.title}
+              book={book}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   )
 }
 

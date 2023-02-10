@@ -25,10 +25,10 @@ const BookCard: FC<IBookCard> = ({ book }) => {
   return (
     <StyledCard>
       <CardMedia
-        height="320"
+        height="280"
         component="img"
         alt={book.title}
-        image={book.image}
+        image={book.picture}
       />
       <CardContent>
         <BookInfo

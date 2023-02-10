@@ -8,7 +8,7 @@ type TypeLink = { path: string, label: string }
 const links: TypeLink[] = [
   {
     path: '/',
-    label: 'Главная',
+    label: 'Каталог',
   },
   {
     path: '/cart',
@@ -17,10 +17,10 @@ const links: TypeLink[] = [
 ]
 
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
-  color: theme.palette.common.black,
+  color: theme.palette.common.white,
   textDecoration: 'none',
   '&.active': {
-    color: theme.palette.common.white,
+    textDecoration: 'underline',
   },
 }))
 
