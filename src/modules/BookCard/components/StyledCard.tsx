@@ -1,12 +1,15 @@
-import { styled } from '@mui/material/styles'
+import { alpha, styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 
 const StyledCard = styled(Card)(({ theme }) => ({
   width: 216,
-  margin: '0 auto',
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
+
+  '&:hover': {
+    boxShadow: `0 0 15px ${alpha(theme.palette.common.black, 0.35)}`,
+  },
 
   '& .MuiCardMedia-media': {
     padding: theme.spacing(1),

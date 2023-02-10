@@ -2,25 +2,30 @@ import React, { FC } from 'react'
 import { Box, Checkbox } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Accordion, AccordionSummary, AccordionDetails } from '../../../ui/Accordion'
+import { Accordion, AccordionSummary, AccordionDetails } from './Accordion'
 import { categories } from '../../../resources/categories'
 
 interface ICategoryAccordion {
   chosenCategories: string[],
+  isDisabled: boolean,
   toggleCategory: (category: string) => void
 }
 
-const CategoryAccordion: FC<ICategoryAccordion> = ({
+const Category: FC<ICategoryAccordion> = ({
   chosenCategories,
   toggleCategory,
+  isDisabled,
 }) => (
-  <Accordion defaultExpanded>
+  <Accordion
+    defaultExpanded={!isDisabled}
+    disabled={isDisabled}
+  >
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
       aria-controls="panel1a-content"
       id="panel1a-header"
     >
-      <Typography>Категория</Typography>
+      <Typography fontWeight={700}>Категория</Typography>
     </AccordionSummary>
     <AccordionDetails>
       <Box
@@ -30,6 +35,7 @@ const CategoryAccordion: FC<ICategoryAccordion> = ({
       >
         {categories.map(category => (
           <Box
+            key={category}
             display="flex"
             alignItems="flex-start"
             gap={1}
@@ -49,4 +55,4 @@ const CategoryAccordion: FC<ICategoryAccordion> = ({
     </AccordionDetails>
   </Accordion>
 )
-export default CategoryAccordion
+export default Category

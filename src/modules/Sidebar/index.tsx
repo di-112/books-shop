@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { alpha, styled } from '@mui/material/styles'
 import { Box } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import CategoryAccordion from './components/CategoryAccordion'
-import PriceAccordion from './components/PriceAccordion'
-import RatingAccordion from './components/RatingAccordion'
-import { useFilters } from '../../store/filters'
+import Category from './components/Category'
+import Price from './components/Price'
+import Rating from './components/Rating'
+import { useFiltersStore } from '../../store/filters'
 
 const Aside = styled(Box)(({ theme }) => ({
   width: 300,
@@ -17,7 +17,6 @@ const Aside = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(2),
-  paddingBottom: 64,
   height: 'calc(100vh - 2 * var(--header-height))',
   backgroundColor: alpha(theme.palette.common.white, 0.5),
 }))
@@ -29,12 +28,22 @@ const FiltersWrapper = styled(Box)(() => ({
   },
 }))
 
-const Sidebar = () => {
-  const { price, categories } = useFilters(state => state.filters)
+interface ISidebar {
+  isDisabled?: boolean
+}
+
+const Sidebar: FC<ISidebar> = ({ isDisabled = false }) => {
+  const { price, categories } = useFiltersStore(state => state.filters)
 
   const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
   const [chosenCategories, setChosenCategories] = useState(categories)
-  const [rating, setRating] = useState(0)
+  const [chosenRating, setChosenRating] = useState(0)
+
+  const { setPrice, setCategories, setRating } = useFiltersStore(state => ({
+    setRating: state.setRating,
+    setPrice: state.setPrice,
+    setCategories: state.setCategories,
+  }))
 
   const toggleCategory = (category: string) => {
     if (chosenCategories.includes(category)) {
@@ -45,8 +54,19 @@ const Sidebar = () => {
     setChosenCategories([...chosenCategories, category])
   }
 
+  const okHandler = () => {
+    setPrice({
+      min: prices[0],
+      max: prices[1],
+    })
+    setCategories(chosenCategories)
+    setRating(chosenRating)
+  }
+
   return (
-    <Aside component="aside">
+    <Aside
+      component="aside"
+    >
       <Typography
         fontWeight={700}
         variant="body1"
@@ -56,17 +76,20 @@ const Sidebar = () => {
         Фильтр
       </Typography>
       <FiltersWrapper>
-        <CategoryAccordion
+        <Category
+          isDisabled={isDisabled}
           chosenCategories={chosenCategories}
           toggleCategory={toggleCategory}
         />
-        <PriceAccordion
+        <Price
           prices={prices}
+          isDisabled={isDisabled}
           setPrices={setPrices}
         />
-        <RatingAccordion
-          rating={rating}
-          setRating={setRating}
+        <Rating
+          rating={chosenRating}
+          isDisabled={isDisabled}
+          setRating={setChosenRating}
         />
         <Button
           sx={{
@@ -75,6 +98,8 @@ const Sidebar = () => {
             position: 'absolute',
           }}
           variant="contained"
+          onClick={okHandler}
+          disabled={isDisabled}
         >
           Подтвердить
         </Button>

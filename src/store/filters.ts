@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 
 export interface IFilters {
   categories: string[],
+  rating: number,
   price: {
     min?: number,
     max?: number
@@ -12,29 +13,25 @@ export interface IFilters {
 
 interface IFiltersState {
   filters: IFilters,
-  toggleCategory: (category: string) => void,
+  setCategories: (categories: string[]) => void,
   setPrice: (obj : { min?: number, max?: number }) => void,
+  setRating: (value: number) => void,
 }
 
-export const useFilters = create(
+export const useFiltersStore = create(
   persist(immer<IFiltersState>(set => ({
     filters: {
+      rating: 1,
       categories: [],
       price: {
         min: 0,
         max: 2000,
       },
     },
-    toggleCategory: category => {
+    setCategories: categories => {
       set(state => {
-        if (!state.filters.categories.includes(category)) {
-          // eslint-disable-next-line no-param-reassign
-          state.filters.categories.push(category)
-          return
-        }
-
         // eslint-disable-next-line no-param-reassign
-        state.filters.categories = state.filters.categories.filter(item => item !== category)
+        state.filters.categories = categories
       })
     },
     setPrice: ({ min, max }) => {
@@ -44,6 +41,12 @@ export const useFilters = create(
           min,
           max,
         }
+      })
+    },
+    setRating: value => {
+      set(state => {
+        // eslint-disable-next-line no-param-reassign
+        state.filters.rating = value
       })
     },
   })), {

@@ -31,6 +31,7 @@ export interface IBook {
   coauthors: any[];
   description: string;
   picture: string;
+  count: number,
   price: number;
   oldPrice: number;
   bestseller: boolean;

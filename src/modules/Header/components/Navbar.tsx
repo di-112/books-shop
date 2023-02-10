@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import { styled } from '@mui/material/styles'
+import { alpha, styled } from '@mui/material/styles'
 
 type TypeLink = { path: string, label: string }
 
@@ -19,8 +19,10 @@ const links: TypeLink[] = [
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
   color: theme.palette.common.white,
   textDecoration: 'none',
+  padding: '12px 10px',
   '&.active': {
-    textDecoration: 'underline',
+    display: 'block',
+    background: alpha(theme.palette.primary.dark, 1),
   },
 }))
 

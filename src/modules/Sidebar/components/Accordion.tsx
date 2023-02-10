@@ -14,7 +14,6 @@ export const Accordion = styled(AccordionMUI)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   minHeight: '48px !important',
   boxShadow: 'none',
-
   '& .MuiAccordionSummary-content.MuiAccordionSummary-content': {
     margin: 0,
   },

@@ -2,26 +2,41 @@ import React, { FC } from 'react'
 import { Box, Slider } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Accordion, AccordionSummary, AccordionDetails } from '../../../ui/Accordion'
+import { styled } from '@mui/material/styles'
+import { Accordion, AccordionSummary, AccordionDetails } from './Accordion'
 
 interface IPriceAccordion {
   prices: number[]
+  isDisabled: boolean,
   setPrices: (arg: number[]) => void
 }
 
-const PriceAccordion:FC<IPriceAccordion> = ({ prices, setPrices }) => {
+const StyledSlider = styled(Slider)(({ theme }) => ({
+  width: '80%',
+  margin: '0 auto',
+  '.MuiSlider-valueLabel': {
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: 4,
+    padding: `${theme.spacing(0.5)} ${theme.spacing(2)}`,
+  },
+}))
+
+const Price:FC<IPriceAccordion> = ({ prices, setPrices, isDisabled }) => {
   const handleChange = (event: Event, newValue: number | number[]) => {
     setPrices(newValue as number[])
   }
 
   return (
-    <Accordion defaultExpanded>
+    <Accordion
+      defaultExpanded={!isDisabled}
+      disabled={isDisabled}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography>Цена</Typography>
+        <Typography fontWeight={700}>Цена</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Box
@@ -29,8 +44,8 @@ const PriceAccordion:FC<IPriceAccordion> = ({ prices, setPrices }) => {
           display="flex"
           alignItems="center"
         >
-          <Slider
-            getAriaLabel={() => 'Temperature range'}
+          <StyledSlider
+            getAriaLabel={() => 'Диапазон цены'}
             value={prices}
             min={0}
             max={5000}
@@ -44,4 +59,4 @@ const PriceAccordion:FC<IPriceAccordion> = ({ prices, setPrices }) => {
   )
 }
 
-export default PriceAccordion
+export default Price

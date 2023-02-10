@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Header from './modules/Header'
-import Books from './pages/Books'
-import Cart from './pages/Cart'
+import BooksPage from './pages/BooksPage'
+import CartPage from './pages/CartPage'
 
 const App = () => (
   <>
@@ -10,11 +10,11 @@ const App = () => (
     <Routes>
       <Route
         path=""
-        element={<Books />}
+        element={<BooksPage />}
       />
       <Route
         path="cart"
-        element={<Cart />}
+        element={<CartPage />}
       />
     </Routes>
   </>

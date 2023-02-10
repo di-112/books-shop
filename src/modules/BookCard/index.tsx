@@ -14,12 +14,16 @@ interface IBookCard {
 }
 
 const BookCard: FC<IBookCard> = ({ book }) => {
-  const { booksIds, addBook, removeBook } = useCartBooksStore()
+  const { books, addBook, removeBook } = useCartBooksStore()
 
-  const isChosenBook = booksIds.includes(book.id)
+  const isChosenBook = books.map(({ id }) => id).includes(book.id)
 
   const clickHandler = () => {
-    (isChosenBook ? removeBook : addBook)((book.id))
+    if (isChosenBook) {
+      removeBook(book.id)
+    } else {
+      addBook(book)
+    }
   }
 
   return (

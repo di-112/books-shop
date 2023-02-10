@@ -5,7 +5,7 @@ import { useBooks, useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
 import PageWrapper from '../modules/PageWrapper'
 
-const Books = () => {
+const BooksPage = () => {
   useBooksQuery()
 
   const allBooks = useBooks()
@@ -17,12 +17,14 @@ const Books = () => {
       <Grid
         container
         rowGap={4}
+        pt={4}
         component="section"
       >
         {(searchValue ? searchBooks : allBooks).map(book => (
           <Grid
             md={3}
             xs={6}
+            key={book.id}
             component="article"
           >
             <BookCard
@@ -36,4 +38,4 @@ const Books = () => {
   )
 }
 
-export default Books
+export default BooksPage
