@@ -8,17 +8,33 @@ import Price from './components/Price'
 import Rating from './components/Rating'
 import { useFiltersStore } from '../../store/filters'
 
-const Aside = styled(Box)(({ theme }) => ({
+interface ISidebar {
+  isDisabled?: boolean,
+  isOpen?: boolean
+}
+
+const Aside = styled(Box)<ISidebar>(({ theme, ...props }) => ({
   width: 300,
   flexShrink: 0,
   position: 'sticky',
   top: 68,
   border: 'none',
-  display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(2),
+  paddingBottom: theme.spacing(8),
   height: 'calc(100vh - 2 * var(--header-height))',
   backgroundColor: alpha(theme.palette.common.white, 0.5),
+
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+
+    '&': props.isOpen && {
+      display: 'flex',
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+    },
+  },
 }))
 
 const FiltersWrapper = styled(Box)(() => ({
@@ -26,13 +42,10 @@ const FiltersWrapper = styled(Box)(() => ({
   '::-webkit-scrollbar': {
     width: 0,
   },
+  height: 'calc(100% - 48px)',
 }))
 
-interface ISidebar {
-  isDisabled?: boolean
-}
-
-const Sidebar: FC<ISidebar> = ({ isDisabled = false }) => {
+const Sidebar: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
   const { price, categories } = useFiltersStore(state => state.filters)
 
   const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
@@ -66,6 +79,7 @@ const Sidebar: FC<ISidebar> = ({ isDisabled = false }) => {
   return (
     <Aside
       component="aside"
+      isOpen={isOpen}
     >
       <Typography
         fontWeight={700}

@@ -4,36 +4,46 @@ import BookCard from '../modules/BookCard'
 import { useBooks, useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
 import PageWrapper from '../modules/PageWrapper'
+import EmptyData from '../modules/EmptyData'
 
 const BooksPage = () => {
-  useBooksQuery()
-
   const allBooks = useBooks()
+
+  const { isLoading } = useBooksQuery()
 
   const { searchBooks, searchValue } = useSearchBooksStore(state => state)
 
+  const booksForShow = searchValue ? searchBooks : allBooks
+
   return (
-    <PageWrapper title="Каталог">
+    <PageWrapper isLoading={isLoading}>
       <Grid
-        container
-        rowGap={4}
         pt={4}
+        spacing={4}
+        container
+        width="100%"
+        height="100%"
         component="section"
       >
-        {(searchValue ? searchBooks : allBooks).map(book => (
-          <Grid
-            md={3}
-            xs={6}
-            key={book.id}
-            component="article"
-          >
-            <BookCard
-              key={book.title}
-              book={book}
-            />
-          </Grid>
-        ))}
+        {booksForShow.length
+          ? booksForShow.map(book => (
+            <Grid
+              item
+              lg={12}
+              xl={6}
+              key={book.id}
+              width="100%"
+              component="article"
+            >
+              <BookCard
+                key={book.title}
+                book={book}
+              />
+            </Grid>
+          ))
+          : <EmptyData />}
       </Grid>
+
     </PageWrapper>
   )
 }

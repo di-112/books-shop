@@ -91,11 +91,6 @@ const BookInfo: FC<IBookInfo> = ({
           variant="body2"
           color="text.secondary"
           mb={1}
-          sx={{
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-          }}
         >
           <strong>Категория:</strong>
           {' '}

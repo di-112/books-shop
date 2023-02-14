@@ -1,11 +1,10 @@
 import React from 'react'
-import { Box, useTheme } from '@mui/material'
-import Typography from '@mui/material/Typography'
+import { Box, Typography, useTheme } from '@mui/material'
 import { alpha } from '@mui/material/styles'
-import Button from '@mui/material/Button'
 import Cart from '../modules/Cart'
 import PageWrapper from '../modules/PageWrapper'
 import { useCartBooksStore } from '../store/cart'
+import OrderForm from '../modules/OrderForm'
 
 const CartPage = () => {
   const theme = useTheme()
@@ -14,8 +13,7 @@ const CartPage = () => {
 
   return (
     <PageWrapper
-      title="Корзина"
-      isDisabledSidebar
+      withoutSidebar
     >
       <Box
         display="flex"
@@ -23,7 +21,6 @@ const CartPage = () => {
         height="100%"
       >
         <Cart />
-
         <Box sx={{
           width: 500,
           flexShrink: 0,
@@ -42,19 +39,13 @@ const CartPage = () => {
             display="flex"
             width="100%"
             flexDirection="column"
-            justifyContent="center"
+            paddingTop={4}
+            paddingBottom={2}
+            paddingLeft={2}
+            paddingRight={2}
           >
-            <Typography fontWeight={700}>Стоимость заказа:</Typography>
-            <Typography fontWeight={700}>
-              {`${cartBooks.reduce((acc, book) => acc + (book.price * book.count), 0)}  ₽`}
-            </Typography>
+            <OrderForm price={cartBooks.reduce((acc, book) => acc + (book.price * book.count), 0)} />
           </Box>
-          <Button
-            sx={{ alignSelf: 'flex-end' }}
-            variant="contained"
-          >
-            Оформить заказ
-          </Button>
         </Box>
       </Box>
     </PageWrapper>

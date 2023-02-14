@@ -1,13 +1,28 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useSnackbar } from 'notistack'
 import { getBooks } from '../api/api'
 import { IBook } from '../models/book.models'
 import { useFiltersStore } from '../store/filters'
 
-export const useBooksQuery = () => useQuery<IBook[], Error>({
-  queryKey: ['books'],
-  queryFn: getBooks,
-  staleTime: 60000 * 5,
-})
+export const useBooksQuery = () => {
+  const { enqueueSnackbar } = useSnackbar()
+
+  const data = useQuery<IBook[], Error>({
+    queryKey: ['books'],
+    queryFn: getBooks,
+    staleTime: 60000 * 5,
+    retry: false,
+  })
+
+  useEffect(() => {
+    if (data.isError) {
+      enqueueSnackbar('Не удалось получить список книг', { variant: 'error' })
+    }
+  }, [data.isError])
+
+  return data
+}
 
 export const useBooks = () => {
   const client = useQueryClient()
