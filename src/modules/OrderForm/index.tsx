@@ -20,7 +20,7 @@ interface IOrderForm {
 
 const OrderForm: FC<IOrderForm> = ({ price }) => {
   const {
-    control, reset, register, trigger,
+    control,
   } = useForm<IOrderFormValues>({
     defaultValues: initialData,
     mode: 'onBlur',

@@ -4,7 +4,7 @@ import { Badge } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useCartBooksStore } from '../../../store/cart'
 
-const Cart = () => {
+const CartIcon = () => {
   const chosenBooks = useCartBooksStore(state => state.books)
 
   const navigate = useNavigate()
@@ -23,4 +23,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default CartIcon

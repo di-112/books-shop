@@ -13,9 +13,10 @@ const CartPage = () => {
 
   return (
     <PageWrapper
-      withoutSidebar
+      withoutFilters
     >
       <Box
+        component="section"
         display="flex"
         gap="10%"
         height="100%"

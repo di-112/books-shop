@@ -45,7 +45,7 @@ const FiltersWrapper = styled(Box)(() => ({
   height: 'calc(100% - 48px)',
 }))
 
-const Sidebar: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
+const Filters: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
   const { price, categories } = useFiltersStore(state => state.filters)
 
   const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
@@ -122,4 +122,4 @@ const Sidebar: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
   )
 }
 
-export default Sidebar
+export default Filters

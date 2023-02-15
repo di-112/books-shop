@@ -3,22 +3,22 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
-import Search from './components/Search/Search'
-import Cart from './components/Cart'
+import SearchInput from './components/SearchInput'
+import CartIcon from './components/CartIcon'
 import Navbar from './components/Navbar'
 
 const StyledToolbar = styled(Toolbar)(() => ({
   minHeight: 'var(--header-height) !important',
-  maxWidth: '1240px',
   width: '100%',
+  maxWidth: '1240px',
   margin: '0 auto',
 }))
 
 const StyledRightBox = styled(Box)(() => ({
   flexGrow: 1,
   display: 'flex',
-  justifyContent: 'flex-end',
   alignItems: 'center',
+  justifyContent: 'flex-end',
 }))
 
 const Header = () => (
@@ -26,8 +26,8 @@ const Header = () => (
     <StyledToolbar>
       <Navbar />
       <StyledRightBox>
-        <Search />
-        <Cart />
+        <SearchInput />
+        <CartIcon />
       </StyledRightBox>
     </StyledToolbar>
   </AppBar>

@@ -37,14 +37,14 @@ export const useBooks = () => {
 
   if (categories?.length) {
     return allBooks.filter(book => {
-      const isCategpry = categories.some(category => book.category
+      const isCategory = categories.some(category => book.category
         .title.toLowerCase().includes(category.toLowerCase()))
 
-      const isRating = Number(book.rating.count) > rating
+      const isRating = Number(book.rating.count) >= rating
 
       const isPrice = book.price >= min && book.price <= max
 
-      return isCategpry && isRating && isPrice
+      return isCategory && isRating && isPrice
     })
   }
 

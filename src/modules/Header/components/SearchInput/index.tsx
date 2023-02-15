@@ -5,7 +5,7 @@ import StyledInputBase from './components/StyledInput'
 import { useSearchBooksStore } from '../../../../store/search'
 import { useBooks } from '../../../../hooks/useBooksQuery'
 
-const Search = () => {
+const Index = () => {
   const {
     setSearchValue,
     searchValue,
@@ -28,10 +28,10 @@ const Search = () => {
       <StyledInputBase
         value={searchValue}
         onChange={changeHandler}
-        placeholder="Search…"
+        placeholder="Поиск…"
         inputProps={{ 'aria-label': 'search' }}
       />
     </SearchWrapper>
   )
 }
-export default Search
+export default Index

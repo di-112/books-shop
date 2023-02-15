@@ -14,8 +14,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   margin: '0 auto',
 
   '& img': {
-    flex: '0 0 216px',
-    height: 296,
+    flex: '0 0 180px',
+    height: 280,
   },
 
   '& .MuiCardMedia-media': {
@@ -40,21 +40,15 @@ const StyledCard = styled(Card)(({ theme }) => ({
     flexDirection: 'column',
     width: 215,
 
+    '& .MuiCardContent-root': {
+      paddingBottom: theme.spacing(1),
+    },
+
     '& .MuiCardActions-spacing': {
       position: 'relative',
-    },
-
-    '& img': {
-      flex: '0 0 280px',
-    },
-  },
-
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-
-    '& .MuiCardActions-spacing': {
       padding: theme.spacing(1),
     },
   },
 }))
+
 export default StyledCard

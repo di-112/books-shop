@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { styled } from '@mui/material/styles'
 import { Box } from '@mui/material'
-import Sidebar from './Sidebar'
+import Filters from './Filters'
 import Loader from './Loader'
 
 const SectionWrapper = styled(Box)(() => ({
@@ -14,6 +14,7 @@ const SectionWrapper = styled(Box)(() => ({
 
 const ContentWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
+  height: 1,
   columnGap: theme.spacing(4),
   margin: '0 auto',
   minHeight: '100vh',
@@ -27,17 +28,17 @@ const ContentWrapper = styled(Box)(({ theme }) => ({
 interface IPageWrapper {
   isLoading?: boolean,
   children: React.ReactNode
-  withoutSidebar?: boolean,
+  withoutFilters?: boolean,
 }
 
 const PageWrapper:FC<IPageWrapper> = ({
   children,
   isLoading,
-  withoutSidebar = false,
+  withoutFilters = false,
 }) => (
   <ContentWrapper className="content_wrapper">
-    {!withoutSidebar && <Sidebar />}
-    <SectionWrapper as="main">
+    {!withoutFilters && <Filters />}
+    <SectionWrapper component="main">
       {isLoading ? <Loader /> : children}
     </SectionWrapper>
   </ContentWrapper>

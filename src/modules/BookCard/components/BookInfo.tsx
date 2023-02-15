@@ -1,28 +1,11 @@
 import React, { FC } from 'react'
 import Typography from '@mui/material/Typography'
-import {
-  Box, Rating, Tooltip, tooltipClasses, TooltipProps,
-} from '@mui/material'
-import { alpha, styled } from '@mui/material/styles'
+import { Box, Rating } from '@mui/material'
 import { IBook } from '../../../models/book.models'
 
 interface IBookInfo {
   book: IBook
 }
-
-const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip
-    {...props}
-    classes={{ popper: className }}
-  />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
-    fontSize: theme.typography.pxToRem(12),
-    border: `1px solid ${alpha(theme.palette.common.black, 0.15)}`,
-  },
-}))
 
 const BookInfo: FC<IBookInfo> = ({
   book,
@@ -37,10 +20,7 @@ const BookInfo: FC<IBookInfo> = ({
         mb={2}
         gutterBottom
         fontWeight={700}
-        sx={{
-          textAlign: 'left',
-          cursor: 'default',
-        }}
+        align="left"
         variant="h6"
       >
         {price !== oldPrice ? (
@@ -62,45 +42,35 @@ const BookInfo: FC<IBookInfo> = ({
           </Box>
         ) : `${price} ₽`}
       </Typography>
-      <HtmlTooltip title={title}>
-        <Typography
-          mb={2}
-          gutterBottom
-          sx={{
-            textAlign: 'left',
-            cursor: 'default',
-          }}
-          variant="subtitle1"
-        >
-          {title}
-        </Typography>
-      </HtmlTooltip>
+      <Typography
+        mb={2}
+        gutterBottom
+        align="left"
+        variant="subtitle1"
+      >
+        {title}
+      </Typography>
       <Box sx={{ textAlign: 'left' }}>
         <Typography
+          mb={1}
           variant="body2"
           color="text.secondary"
-          mb={1}
         >
           <strong>Автор:</strong>
-          {' '}
-          {authors[0]?.firstName}
-          {' '}
-          {authors[0]?.lastName}
+          {` ${authors[0]?.firstName} ${authors[0]?.lastName}`}
         </Typography>
         <Typography
+          mb={1}
           variant="body2"
           color="text.secondary"
-          mb={1}
         >
           <strong>Категория:</strong>
-          {' '}
-          {book.category.title}
+          {` ${book.category.title}`}
         </Typography>
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 0.5,
-        }}
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={0.5}
         >
           <Typography
             variant="body2"

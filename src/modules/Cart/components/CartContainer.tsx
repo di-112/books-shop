@@ -3,9 +3,9 @@ import { Box } from '@mui/material'
 
 export const CartContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
+  width: '100%',
   flexDirection: 'column',
   gap: theme.spacing(2),
-  paddingTop: theme.spacing(2),
 
   overflow: 'auto',
   '::-webkit-scrollbar': {
