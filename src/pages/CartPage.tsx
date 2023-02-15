@@ -1,53 +1,27 @@
 import React from 'react'
-import { Box, Typography, useTheme } from '@mui/material'
-import { alpha } from '@mui/material/styles'
+import { Box, useTheme } from '@mui/material'
 import Cart from '../modules/Cart'
 import PageWrapper from '../modules/PageWrapper'
-import { useCartBooksStore } from '../store/cart'
-import OrderForm from '../modules/OrderForm'
+import Order from '../modules/Order'
 
 const CartPage = () => {
   const theme = useTheme()
 
-  const cartBooks = useCartBooksStore(state => state.books)
-
   return (
-    <PageWrapper
-      withoutFilters
-    >
+    <PageWrapper withoutFilters>
       <Box
         component="section"
         display="flex"
-        gap="10%"
-        height="100%"
+        gap={4}
+        sx={{
+          height: '100%',
+          [theme.breakpoints.down('md')]: {
+            flexDirection: 'column',
+          },
+        }}
       >
         <Cart />
-        <Box sx={{
-          width: 500,
-          flexShrink: 0,
-          border: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: 2,
-          height: '100%',
-          backgroundColor: alpha(theme.palette.common.white, 0.7),
-        }}
-        >
-          <Typography fontWeight={700}>Общая информация</Typography>
-          <Box
-            flexGrow={1}
-            display="flex"
-            width="100%"
-            flexDirection="column"
-            paddingTop={4}
-            paddingBottom={2}
-            paddingLeft={2}
-            paddingRight={2}
-          >
-            <OrderForm price={cartBooks.reduce((acc, book) => acc + (book.price * book.count), 0)} />
-          </Box>
-        </Box>
+        <Order />
       </Box>
     </PageWrapper>
   )

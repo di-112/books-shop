@@ -93,23 +93,20 @@ const OrderForm: FC<IOrderForm> = ({ price }) => {
       <Box
         display="flex"
         flexGrow={1}
+        flexDirection="column"
         alignItems="flex-end"
-        justifyContent="space-between"
+        justifyContent="flex-end"
         gap={1}
       >
         <Box
           display="flex"
           gap={1}
+          mb={1}
         >
           <Typography fontWeight={700}>Стоимость заказа:</Typography>
-          <Typography fontWeight={700}>
-            {`${price}  ₽`}
-          </Typography>
+          <Typography fontWeight={700}>{`${price}  ₽`}</Typography>
         </Box>
-        <Button
-          sx={{ alignSelf: 'flex-end' }}
-          variant="contained"
-        >
+        <Button variant="contained">
           Оформить заказ
         </Button>
       </Box>

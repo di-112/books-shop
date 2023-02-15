@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { useCartBooksStore } from '../../../store/cart'
@@ -16,16 +16,28 @@ const CartItem: FC<ICartItem> = ({ book }) => {
   const plusHandler = () => incrementBookCount(book.id)
   const minusHandler = () => decrementBookCount(book.id)
 
+  const theme = useTheme()
+
   return (
     <Box
-      display="flex"
       gap={4}
+      display="flex"
     >
-      <img
+      <Box
         width={80}
-        src={book.picture}
-        alt={book.title}
-      />
+        sx={{
+          alignSelf: 'flex-start',
+          [theme.breakpoints.down('md')]: {
+            width: '10%',
+          },
+        }}
+      >
+        <img
+          width="100%"
+          src={book.picture}
+          alt={book.title}
+        />
+      </Box>
       <Typography
         variant="body2"
         fontWeight={700}
