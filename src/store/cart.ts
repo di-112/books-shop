@@ -9,6 +9,7 @@ interface CartBooksState {
   removeBook: (id: number) => void,
   incrementBookCount: (id: number) => void,
   decrementBookCount: (id: number) => void,
+  clearCart: () => void
 }
 
 export const useCartBooksStore = create(
@@ -53,6 +54,10 @@ export const useCartBooksStore = create(
         state.books = state.books.filter(book => book.id !== id)
       })
     },
+    clearCart: () => set(state => {
+      // eslint-disable-next-line no-param-reassign
+      state.books = []
+    }),
   })), {
     name: 'cartBooks',
   }),
