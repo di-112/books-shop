@@ -10,10 +10,9 @@ import { useFiltersStore } from '../../store/filters'
 
 interface ISidebar {
   isDisabled?: boolean,
-  isOpen?: boolean
 }
 
-const Aside = styled(Box)<ISidebar>(({ theme, ...props }) => ({
+const Aside = styled(Box)<ISidebar>(({ theme }) => ({
   width: 300,
   flexShrink: 0,
   position: 'sticky',
@@ -27,13 +26,6 @@ const Aside = styled(Box)<ISidebar>(({ theme, ...props }) => ({
 
   [theme.breakpoints.down('sm')]: {
     display: 'none',
-
-    '&': props.isOpen && {
-      display: 'flex',
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-    },
   },
 }))
 
@@ -45,7 +37,7 @@ const FiltersWrapper = styled(Box)(() => ({
   height: 'calc(100% - 48px)',
 }))
 
-const Filters: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
+const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
   const { price, categories } = useFiltersStore(state => state.filters)
 
   const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
@@ -79,7 +71,6 @@ const Filters: FC<ISidebar> = ({ isDisabled = false, isOpen }) => {
   return (
     <Aside
       component="aside"
-      isOpen={isOpen}
     >
       <Typography
         fontWeight={700}
