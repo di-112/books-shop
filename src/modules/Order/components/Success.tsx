@@ -4,7 +4,6 @@ import { Box, Button } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useNavigate } from 'react-router-dom'
-import { useCartBooksStore } from '../../../store/cart'
 
 const SuccessContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -22,11 +21,8 @@ interface ISuccess {
 const Success:FC<ISuccess> = ({ setIsSuccess }) => {
   const navigate = useNavigate()
 
-  const clearCart = useCartBooksStore(state => state.clearCart)
-
   const backHandler = () => {
     setIsSuccess(false)
-    clearCart()
     navigate('/')
   }
 

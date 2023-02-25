@@ -8,6 +8,7 @@ import { StyledTextField } from './components/StyledTextField'
 import Field from './components/Field'
 import Success from '../Success'
 import Loader from '../../../Loader'
+import { useCartBooksStore } from '../../../../store/cart'
 
 interface IOrderFormValues {
   firstName: string
@@ -32,6 +33,8 @@ const OrderForm: FC<IOrderForm> = ({ price }) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  const clearCart = useCartBooksStore(state => state.clearCart)
+
   if (isLoading) {
     return <Loader />
   }
@@ -43,6 +46,7 @@ const OrderForm: FC<IOrderForm> = ({ price }) => {
   const orderHandler = () => {
     setIsLoading(true)
     setTimeout(() => {
+      clearCart()
       setIsLoading(false)
       setIsSuccess(true)
     }, 1000)
