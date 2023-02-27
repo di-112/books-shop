@@ -2,7 +2,7 @@ import { alpha, styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  height: 'auto',
+  height: '100%',
   display: 'flex',
   position: 'relative',
   maxWidth: 700,
@@ -15,7 +15,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
   '& img': {
     flex: '0 0 180px',
-    height: 280,
+    overflow: 'hidden',
+    maxHeight: 260,
+    alignSelf: 'center',
   },
 
   '& .MuiCardMedia-media': {
@@ -39,6 +41,11 @@ const StyledCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column',
     width: 215,
+
+    '& img': {
+      width: 180,
+      flex: '0 0 auto',
+    },
 
     '& .MuiCardContent-root': {
       paddingBottom: theme.spacing(1),

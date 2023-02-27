@@ -22,8 +22,9 @@ const BooksPage = () => {
         spacing={4}
         container
         width="100%"
-        height="100%"
+        flexGrow={booksForShow.length ? 0 : 1}
         component="section"
+        mb={4}
       >
         {booksForShow.length
           ? booksForShow.map(book => (
@@ -43,7 +44,6 @@ const BooksPage = () => {
           ))
           : <EmptyData />}
       </Grid>
-
     </PageWrapper>
   )
 }

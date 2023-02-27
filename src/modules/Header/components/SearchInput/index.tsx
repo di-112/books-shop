@@ -5,7 +5,7 @@ import StyledInputBase from './components/StyledInput'
 import { useSearchBooksStore } from '../../../../store/search'
 import { useBooks } from '../../../../hooks/useBooksQuery'
 
-const Index = () => {
+const SearchInput = () => {
   const {
     setSearchValue,
     searchValue,
@@ -34,4 +34,4 @@ const Index = () => {
     </SearchWrapper>
   )
 }
-export default Index
+export default SearchInput

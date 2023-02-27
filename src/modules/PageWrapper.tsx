@@ -7,14 +7,14 @@ import Loader from './Loader'
 const SectionWrapper = styled(Box)(() => ({
   maxWidth: 1180,
   flexGrow: 1,
-  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
   margin: '0 auto',
   textAlign: 'center',
 }))
 
 const ContentWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
-  height: 1,
   columnGap: theme.spacing(4),
   margin: '0 auto',
   minHeight: '100vh',
