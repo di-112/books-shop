@@ -5,23 +5,23 @@ import { getBooks } from '../api/api'
 import { IBook } from '../models/book.models'
 import { useFiltersStore } from '../store/filters'
 
-export const useBooksQuery = () => {
+export const useBooksQuery = (page: number) => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const data = useQuery<IBook[], Error>({
-    queryKey: ['books'],
+  const response = useQuery<IBook[], Error>({
+    queryKey: ['books', page],
     queryFn: getBooks,
     staleTime: 60000 * 5,
     retry: false,
   })
 
   useEffect(() => {
-    if (data.isError) {
+    if (response.isError) {
       enqueueSnackbar('Не удалось получить список книг', { variant: 'error' })
     }
-  }, [data.isError])
+  }, [response.isError])
 
-  return data
+  return response
 }
 
 export const useBooks = () => {

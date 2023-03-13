@@ -1,15 +1,17 @@
-import React from 'react'
-import { Grid } from '@mui/material'
+import React, { useState } from 'react'
+import { Grid, Pagination } from '@mui/material'
 import BookCard from '../modules/BookCard'
-import { useBooks, useBooksQuery } from '../hooks/useBooksQuery'
+import { useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
 import PageWrapper from '../modules/PageWrapper'
 import EmptyData from '../modules/EmptyData'
 
-const BooksPage = () => {
-  const allBooks = useBooks()
+const PAGE_SIZE = 10
 
-  const { isLoading } = useBooksQuery()
+const BooksPage = () => {
+  const [page, setPage] = useState(1)
+
+  const { data: allBooks = [], isLoading } = useBooksQuery(page)
 
   const { searchBooks, searchValue } = useSearchBooksStore(state => state)
 
@@ -44,6 +46,13 @@ const BooksPage = () => {
           ))
           : <EmptyData />}
       </Grid>
+      <Pagination
+        page={page}
+        count={PAGE_SIZE}
+        color="primary"
+        onChange={(e, value) => setPage(value)}
+        shape="rounded"
+      />
     </PageWrapper>
   )
 }
