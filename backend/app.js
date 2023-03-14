@@ -3,21 +3,10 @@ const cors = require('cors');
 const { books: allBooks } = require('./db/books.json')
 const express = require("express");
 
-const allowedOrigins = ['https://di-112.github.io/books-shop',
-                        'http://localhost:5173/'];
-app.use(cors({
-    origin: function(origin, callback){
-        if(!origin) return callback(null, true);
-        if(allowedOrigins.indexOf(origin) === -1){
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
-}));
+app.use(cors({}));
 app.use(express.json())
 
-app.post('/api/books', (req, res) => {
+app.post('/api', (req, res) => {
     const { limit, page, search, filters } = req.body
 
     const books = search ? allBooks.filter(book => book.title.toLowerCase().includes(search.toLowerCase())) : allBooks

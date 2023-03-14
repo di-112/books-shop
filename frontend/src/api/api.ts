@@ -3,7 +3,7 @@ import { QueryFunctionContext } from '@tanstack/react-query'
 import { IBooksQuery } from '../models/book.models'
 
 const booksApi = axios.create({
-  baseURL: 'https://books-shop-jet.vercel.app/api/books',
+  baseURL: 'https://books-shop-jet.vercel.app',
 })
 
 export const getBooks = (queryData: QueryFunctionContext) => booksApi
