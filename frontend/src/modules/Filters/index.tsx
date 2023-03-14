@@ -6,7 +6,8 @@ import Button from '@mui/material/Button'
 import Category from './components/Category'
 import Price from './components/Price'
 import Rating from './components/Rating'
-import { useFiltersStore } from '../../store/filters'
+import { initialFilters, useFiltersStore } from '../../store/filters'
+import { usePageStore } from '../../store/page'
 
 interface ISidebar {
   isDisabled?: boolean,
@@ -38,11 +39,12 @@ const FiltersWrapper = styled(Box)(() => ({
 }))
 
 const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
-  const { price, categories } = useFiltersStore(state => state.filters)
+  const { price, categories, rating } = useFiltersStore(state => state.filters)
 
-  const [prices, setPrices] = useState([price.min || 0, price.max || 5000])
+  const [prices, setPrices] = useState([price.min, price.max])
   const [chosenCategories, setChosenCategories] = useState(categories)
-  const [chosenRating, setChosenRating] = useState(0)
+  const [chosenRating, setChosenRating] = useState(rating)
+  const setPage = usePageStore(state => state.setPage)
 
   const {
     setPrice,
@@ -61,7 +63,16 @@ const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
     setChosenCategories([...chosenCategories, category])
   }
 
+  const cancelHandler = () => {
+    reset()
+    setPage(1)
+    setPrices([initialFilters.price.min, initialFilters.price.max])
+    setChosenCategories(initialFilters.categories)
+    setChosenRating(initialFilters.rating)
+  }
+
   const okHandler = () => {
+    setPage(1)
     setPrice({
       min: prices[0],
       max: prices[1],
@@ -119,7 +130,7 @@ const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
           }}
           color="error"
           variant="contained"
-          onClick={reset}
+          onClick={cancelHandler}
           disabled={isDisabled}
         >
           Сбросить

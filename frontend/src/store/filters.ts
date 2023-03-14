@@ -7,8 +7,8 @@ export interface IFilters {
   isActive: boolean,
   rating: number,
   price: {
-    min?: number,
-    max?: number
+    min: number,
+    max: number
   }
 }
 
@@ -16,13 +16,13 @@ interface IFiltersState {
   filters: IFilters,
   reset: () => void,
   setCategories: (categories: string[]) => void,
-  setPrice: (obj: { min?: number, max?: number }) => void,
+  setPrice: (obj: { min: number, max: number }) => void,
   setIsActive: (bool: boolean) => void,
   setRating: (value: number) => void,
 }
 
-const initialFilters = {
-  rating: 1,
+export const initialFilters = {
+  rating: 0,
   isActive: false,
   categories: [],
   price: {

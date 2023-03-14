@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
