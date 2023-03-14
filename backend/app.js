@@ -3,7 +3,9 @@ const cors = require('cors');
 const { books: allBooks } = require('./db/books.json')
 const express = require("express");
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.json())
 
 app.post('/api/books', (req, res) => {
