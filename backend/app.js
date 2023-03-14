@@ -44,6 +44,10 @@ app.post('/api', (req, res) => {
     })
 })
 
+app.get('/', (req, res) => {
+    res.send(allBooks)
+})
+
 const PORT = process.env.PORT || 5050
 
 app.listen(PORT, () => {
