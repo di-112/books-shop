@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Grid } from '@mui/material'
 import BookCard from '../modules/BookCard'
-import { useBooksQuery } from '../hooks/useBooksQuery'
+import { useBookListQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
 import PageWrapper from '../modules/PageWrapper'
 import EmptyData from '../modules/EmptyData'
@@ -9,11 +9,11 @@ import { useFiltersStore } from '../store/filters'
 import { usePageStore } from '../store/page'
 import Pagination from '../modules/Pagination'
 
-const BooksPage = () => {
+const BookListPage = () => {
   const { searchValue } = useSearchBooksStore(state => state)
   const { filters } = useFiltersStore(state => state)
   const { page, setPage, setCountPage } = usePageStore(state => state)
-  const { data, isLoading } = useBooksQuery(page, searchValue, filters)
+  const { data, isLoading } = useBookListQuery(page, searchValue, filters)
 
   const books = data?.books || []
 
@@ -59,4 +59,4 @@ const BooksPage = () => {
   )
 }
 
-export default BooksPage
+export default BookListPage

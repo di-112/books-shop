@@ -130,7 +130,6 @@ const OrderForm: FC<IOrderForm> = ({ price }) => {
               <StyledTextField
                 placeholder="Дата"
                 type="date"
-                defaultValue="2017-05-24"
                 error={fieldState.invalid}
                 {...field}
               />

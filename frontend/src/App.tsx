@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Header from './modules/Header'
-import BooksPage from './pages/BooksPage'
+import BookListPage from './pages/BookListPage'
 import CartPage from './pages/CartPage'
 import background from './assets/background.jpg'
+import BookPage from './pages/BookPage'
 
 const App = () => {
   useEffect(() => {
@@ -16,7 +17,11 @@ const App = () => {
       <Routes>
         <Route
           path=""
-          element={<BooksPage />}
+          element={<BookListPage />}
+        />
+        <Route
+          path="book/:id"
+          element={<BookPage />}
         />
         <Route
           path="cart"
