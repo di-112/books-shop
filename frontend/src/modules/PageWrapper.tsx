@@ -9,6 +9,7 @@ const SectionWrapper = styled(Box)(() => ({
   flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
   margin: '0 auto',
   textAlign: 'center',
 }))

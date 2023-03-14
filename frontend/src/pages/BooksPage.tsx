@@ -1,35 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Pagination } from '@mui/material'
 import BookCard from '../modules/BookCard'
 import { useBooksQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
 import PageWrapper from '../modules/PageWrapper'
 import EmptyData from '../modules/EmptyData'
+import { useFiltersStore } from '../store/filters'
 
 const PAGE_SIZE = 10
 
 const BooksPage = () => {
+  const { searchValue } = useSearchBooksStore(state => state)
+  const { filters } = useFiltersStore(state => state)
   const [page, setPage] = useState(1)
 
-  const { data: allBooks = [], isLoading } = useBooksQuery(page)
+  const { data, isLoading } = useBooksQuery(page, searchValue, filters)
 
-  const { searchBooks, searchValue } = useSearchBooksStore(state => state)
+  const books = data?.books || []
 
-  const booksForShow = searchValue ? searchBooks : allBooks
+  const countPage = data ? Math.ceil(data.total / PAGE_SIZE) : 1
+
+  useEffect(() => {
+    setPage(1)
+  }, [searchValue])
 
   return (
     <PageWrapper isLoading={isLoading}>
       <Grid
         pt={4}
+        mb={4}
         spacing={4}
         container
         width="100%"
-        flexGrow={booksForShow.length ? 0 : 1}
         component="section"
-        mb={4}
+        flexGrow={books.length ? 0 : 1}
       >
-        {booksForShow.length
-          ? booksForShow.map(book => (
+        {books.length
+          ? books.map(book => (
             <Grid
               item
               lg={12}
@@ -48,7 +55,8 @@ const BooksPage = () => {
       </Grid>
       <Pagination
         page={page}
-        count={PAGE_SIZE}
+        disabled={countPage === 1}
+        count={countPage}
         color="primary"
         onChange={(e, value) => setPage(value)}
         shape="rounded"

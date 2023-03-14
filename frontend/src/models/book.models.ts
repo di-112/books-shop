@@ -24,6 +24,11 @@ interface Category {
   url: string;
 }
 
+export interface IBooksQuery {
+  books: IBook[],
+  total: number
+}
+
 export interface IBook {
   id: number;
   title: string;

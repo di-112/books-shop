@@ -2,15 +2,16 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useSnackbar } from 'notistack'
 import { getBooks } from '../api/api'
-import { IBook } from '../models/book.models'
-import { useFiltersStore } from '../store/filters'
+import { IBook, IBooksQuery } from '../models/book.models'
+import { IFilters, useFiltersStore } from '../store/filters'
 
-export const useBooksQuery = (page: number) => {
+export const useBooksQuery = (page: number, search?:string, filters?: IFilters) => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const response = useQuery<IBook[], Error>({
-    queryKey: ['books', page],
+  const response = useQuery<IBooksQuery, Error>({
+    queryKey: ['books', page, search, filters],
     queryFn: getBooks,
+    keepPreviousData: true,
     staleTime: 60000 * 5,
     retry: false,
   })

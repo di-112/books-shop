@@ -44,11 +44,13 @@ const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
   const [chosenCategories, setChosenCategories] = useState(categories)
   const [chosenRating, setChosenRating] = useState(0)
 
-  const { setPrice, setCategories, setRating } = useFiltersStore(state => ({
-    setRating: state.setRating,
-    setPrice: state.setPrice,
-    setCategories: state.setCategories,
-  }))
+  const {
+    setPrice,
+    setCategories,
+    setRating,
+    setIsActive,
+    reset,
+  } = useFiltersStore(state => state)
 
   const toggleCategory = (category: string) => {
     if (chosenCategories.includes(category)) {
@@ -66,6 +68,7 @@ const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
     })
     setCategories(chosenCategories)
     setRating(chosenRating)
+    setIsActive(true)
   }
 
   return (
@@ -107,6 +110,19 @@ const Filters: FC<ISidebar> = ({ isDisabled = false }) => {
           disabled={isDisabled}
         >
           Подтвердить
+        </Button>
+        <Button
+          sx={{
+            left: 16,
+            bottom: 16,
+            position: 'absolute',
+          }}
+          color="error"
+          variant="contained"
+          onClick={reset}
+          disabled={isDisabled}
+        >
+          Сбросить
         </Button>
       </FiltersWrapper>
     </Aside>
