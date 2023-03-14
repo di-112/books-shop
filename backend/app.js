@@ -44,5 +44,9 @@ app.post('/api/books', (req, res) => {
     })
 })
 
-app.listen(6500)
+const PORT = process.env.PORT || 5050
+
+app.listen(PORT, () => {
+    console.log(`Server start on ${PORT} port`)
+})
 
