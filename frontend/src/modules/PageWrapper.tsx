@@ -4,8 +4,12 @@ import { Box } from '@mui/material'
 import Filters from './Filters'
 import Loader from './Loader'
 
-const SectionWrapper = styled(Box)(() => ({
-  maxWidth: 1180,
+interface ISectionWrapper {
+  widthContentWrapper?: number
+}
+
+const SectionWrapper = styled(Box)<ISectionWrapper>(({ widthContentWrapper }) => ({
+  maxWidth: widthContentWrapper,
   flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
@@ -30,16 +34,23 @@ interface IPageWrapper {
   isLoading?: boolean,
   children: React.ReactNode
   withoutFilters?: boolean,
+  widthContentWrapper?: number
 }
 
 const PageWrapper:FC<IPageWrapper> = ({
   children,
   isLoading,
+  widthContentWrapper = 1180,
   withoutFilters = false,
 }) => (
-  <ContentWrapper className="content_wrapper">
+  <ContentWrapper
+    className="content_wrapper"
+  >
     {!withoutFilters && <Filters />}
-    <SectionWrapper component="main">
+    <SectionWrapper
+      component="main"
+      widthContentWrapper={widthContentWrapper}
+    >
       {isLoading ? <Loader /> : children}
     </SectionWrapper>
   </ContentWrapper>
