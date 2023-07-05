@@ -7,7 +7,7 @@ import { initialData } from './resources/initialData'
 import { StyledTextField } from './components/StyledTextField'
 import Field from './components/Field'
 import Success from '../Success'
-import Loader from '../../../Loader'
+import Loader from '../../../../shared/ui/Loader'
 import { useCartBooksStore } from '../../../../store/cart'
 
 interface IOrderFormValues {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, useTheme } from '@mui/material'
+import PageWrapper from './ui/PageWrapper'
 import Cart from '../modules/Cart'
-import PageWrapper from '../modules/PageWrapper'
 import Order from '../modules/Order'
 
 const CartPage = () => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { QueryFunctionContext } from '@tanstack/react-query'
-import { IBook, IBooksQuery } from '../models/book.models'
+import { IBook, IBooksQuery } from '../../models/book.models'
 
 const booksApi = axios.create({
   baseURL: 'https://books-shop-jet.vercel.app/api',

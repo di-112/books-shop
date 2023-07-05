@@ -3,7 +3,7 @@ import { Divider } from '@mui/material'
 import CartItem from './components/CartItem'
 import { useCartBooksStore } from '../../store/cart'
 import { CartContainer } from './components/CartContainer'
-import EmptyData from '../EmptyData'
+import EmptyData from '../../shared/ui/EmptyData'
 
 const Cart = () => {
   const chosenBooks = useCartBooksStore(state => state.books)

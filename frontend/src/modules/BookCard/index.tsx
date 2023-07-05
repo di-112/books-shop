@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
+import { useNavigate } from 'react-router-dom'
 import { IBook } from '../../models/book.models'
 import BookInfo from './components/BookInfo'
 import StyledCard from './components/StyledCard'
@@ -15,6 +16,8 @@ interface IBookCard {
 
 const BookCard: FC<IBookCard> = ({ book }) => {
   const { books, addBook, removeBook } = useCartBooksStore()
+
+  const navigate = useNavigate()
 
   const isChosenBook = books.map(({ id }) => id).includes(book.id)
 
@@ -31,6 +34,7 @@ const BookCard: FC<IBookCard> = ({ book }) => {
       <CardMedia
         width={200}
         component="img"
+        onClick={() => navigate(`/book/${book.id}`)}
         alt={book.title}
         image={book.picture}
       />

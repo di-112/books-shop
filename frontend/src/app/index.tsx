@@ -4,9 +4,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HashRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
-import App from './App'
 import './index.css'
-import { theme } from './theme'
+import { theme } from '../shared/config/theme'
+import Header from '../widgets/Header'
+import Routing from '../pages'
 
 const queryClient = new QueryClient()
 
@@ -15,7 +16,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider maxSnack={3}>
-          <App />
+          <Header />
+          <Routing />
         </SnackbarProvider>
       </ThemeProvider>
     </QueryClientProvider>

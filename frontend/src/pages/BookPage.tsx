@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import PageWrapper from '../modules/PageWrapper'
+import PageWrapper from './ui/PageWrapper'
 import { useBookQuery } from '../hooks/useBooksQuery'
 import BookCard from '../modules/BookCard'
 

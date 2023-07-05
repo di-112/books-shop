@@ -3,11 +3,11 @@ import { Grid } from '@mui/material'
 import BookCard from '../modules/BookCard'
 import { useBookListQuery } from '../hooks/useBooksQuery'
 import { useSearchBooksStore } from '../store/search'
-import PageWrapper from '../modules/PageWrapper'
-import EmptyData from '../modules/EmptyData'
-import { useFiltersStore } from '../store/filters'
+import PageWrapper from './ui/PageWrapper'
+import EmptyData from '../shared/ui/EmptyData'
 import { usePageStore } from '../store/page'
 import Pagination from '../modules/Pagination'
+import { useFiltersStore } from '../widgets/Filters/model/filters'
 
 const BookListPage = () => {
   const { searchValue } = useSearchBooksStore(state => state)

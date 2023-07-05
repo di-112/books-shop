@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useSnackbar } from 'notistack'
-import { getBook, getBooks } from '../api/api'
+import { getBook, getBooks } from '../shared/api/axiosBase'
 import { IBook, IBooksQuery } from '../models/book.models'
-import { IFilters } from '../store/filters'
+import { IFilters } from '../widgets/Filters/model/filters'
 
 export const useBookListQuery = (page: number, search?: string, filters?: IFilters) => {
   const { enqueueSnackbar } = useSnackbar()
